@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Zëri i Lirë: Platforma për raportimin e korrupsionit</title>
+<style>
+:root{
+  --navy:#12304d;
+  --navy-deep:#0b2036;
+  --blue:#1d5a8c;
+  --gold:#b08d3c;
+  --bg:#f3f5f8;
+  --white:#fff;
+  --ink:#1c2733;
+  --muted:#526170;
+  --line:#c9d2dc;
+  --notice:#fff7dc;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.65 var(--sans)}
+.wrap{max-width:66rem;margin:0 auto;padding:0 1.25rem}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Shiriti i sipërm */
+.strip{background:var(--navy-deep);color:#d6e0ea;font-size:.85rem}
+.strip .wrap{padding-top:.4rem;padding-bottom:.4rem}
+
+/* Koka */
+.masthead{background:var(--white);border-bottom:1px solid var(--line)}
+.masthead .wrap{display:flex;align-items:center;gap:1rem;padding-top:1.1rem;padding-bottom:1.1rem}
+.seal{width:3.6rem;height:3.6rem;flex:none}
+.masthead h1{margin:0;font:700 1.6rem/1.15 var(--serif);color:var(--navy)}
+.masthead p{margin:.15rem 0 0;color:var(--muted);font-size:.95rem}
+
+/* Navigimi */
+.mainnav{background:var(--navy);border-bottom:4px solid var(--gold)}
+.mainnav .wrap{display:flex;flex-wrap:wrap}
+.mainnav a{color:#fff;text-decoration:none;padding:.85rem 1.2rem;font-weight:600;font-size:.97rem}
+.mainnav a:hover{background:var(--blue)}
+
+/* Hyrja */
+.intro{background:var(--white);border-bottom:1px solid var(--line)}
+.intro .wrap{padding-top:2.5rem;padding-bottom:2.5rem}
+.intro h2{font:700 clamp(1.7rem,3.6vw,2.4rem)/1.2 var(--serif);color:var(--navy);margin:0 0 .8rem;max-width:26ch}
+.intro p{margin:0;color:var(--muted);font-size:1.1rem;max-width:62ch}
+
+/* Faqja */
+.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:1.75rem;align-items:start;padding-top:2rem;padding-bottom:3rem}
+aside{display:grid;gap:1.5rem}
+.panel{background:var(--white);border:1px solid var(--line)}
+.panel>h3{margin:0;padding:.75rem 1.25rem;background:var(--navy);color:#fff;font:700 1.1rem var(--serif)}
+.panel .body{padding:1.25rem}
+
+/* Formulari */
+label.field{display:block;font-weight:700;color:var(--navy);margin-top:1.3rem}
+.body>form>label.field:first-child{margin-top:0}
+.hint{margin:.2rem 0 .6rem;color:var(--muted);font-size:.92rem}
+textarea,input[type=file]{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid #8497a9;border-radius:2px;padding:.75rem}
+textarea{min-height:12rem;resize:vertical}
+input[type=file]{background:var(--bg);padding:.6rem}
+input[type=file]::file-selector-button{font:inherit;font-weight:600;background:var(--navy);color:#fff;border:0;padding:.45rem .9rem;margin-right:.8rem;cursor:pointer}
+.notice{margin-top:1.3rem;background:var(--notice);border:1px solid #e0c978;border-left:5px solid var(--gold);padding:.85rem 1rem;font-size:.93rem}
+.check{display:flex;gap:.6rem;align-items:flex-start;margin-top:1.3rem}
+.check input{margin-top:.35rem;width:1.1rem;height:1.1rem;flex:none}
+button{margin-top:1.5rem;font:700 1.05rem var(--sans);background:var(--navy);color:#fff;border:0;border-bottom:3px solid var(--gold);padding:.85rem 1.8rem;cursor:pointer}
+button:hover{background:var(--blue)}
+
+/* Ana */
+.steps{margin:0;padding-left:1.3rem}
+.steps li{margin-bottom:.8rem}
+.steps li:last-child{margin-bottom:0}
+.plain{margin:0 0 1rem;padding-left:1.1rem}
+.plain li{margin-bottom:.4rem}
+
+/* Fundi */
+footer{background:var(--navy-deep);color:#c3d0dc;font-size:.9rem}
+footer .wrap{padding-top:1.6rem;padding-bottom:2rem}
+footer p{margin:0 0 .5rem;max-width:72ch}
+
+@media (max-width:52rem){
+  .layout{grid-template-columns:1fr}
+  .masthead h1{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="strip">
+  <div class="wrap">Platformë e pavarur raportimi. Arrihet vetëm përmes rrjetit Tor.</div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <svg class="seal" viewBox="0 0 64 64" role="img" aria-label="Stemë">
+      <path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="#12304d" stroke="#b08d3c" stroke-width="3"/>
+      <path d="M32 14v26M22 22h20M22 22l-5 11h10zM42 22l-5 11h10z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M24 44h16" stroke="#b08d3c" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <h1>Zëri i Lirë</h1>
+      <p>Platforma për raportimin e korrupsionit</p>
+    </div>
+  </div>
+</header>
+
+<nav class="mainnav" aria-label="Navigimi kryesor">
+  <div class="wrap">
+    <a href="#raporto">Dërgo raport</a>
+    <a href="#si-funksionon">Si funksionon</a>
+    <a href="#anonimiteti">Anonimiteti</a>
+  </div>
+</nav>
+
+<section class="intro">
+  <div class="wrap">
+    <h2>Raporto korrupsionin pa treguar kush je</h2>
+    <p>Mund të raportosh persona dhe biznese të përfshira në korrupsion. Nuk kërkojmë emër, email apo llogari, dhe nuk ruajmë adresën tënde IP.</p>
+  </div>
+</section>
+
+<main class="wrap layout">
+
+  <section id="raporto" class="panel">
+    <h3>Formulari i raportimit</h3>
+    <div class="body">
+      <form action="submit.php" method="post" enctype="multipart/form-data" autocomplete="off">
+
+        <label class="field" for="mesazhi">Përshkrimi i rastit</label>
+        <p class="hint">Shkruaj kush është përfshirë (person ose biznes), çfarë ka ndodhur, ku dhe kur. Sa më konkret, aq më i dobishëm është raporti.</p>
+        <textarea id="mesazhi" name="mesazhi" maxlength="20000" required></textarea>
+
+        <label class="field" for="skedaret">Dokumente dhe foto</label>
+        <p class="hint">Opsionale. Formate të pranuara: JPG, PNG, WEBP, PDF dhe TXT. Deri në 10 skedarë, secili deri në 10 MB.</p>
+        <input id="skedaret" name="skedaret[]" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.pdf,.txt">
+
+        <div class="notice" role="note">
+          <strong>Kujdes me të dhënat e fshehura.</strong>
+          Fotot dhe dokumentet mund të përmbajnë vendndodhjen GPS, emrin e autorit ose modelin e pajisjes. Hiqi këto para ngarkimit.
+        </div>
+
+        <label class="check">
+          <input type="checkbox" name="miratim" required>
+          <span>E kuptoj që informacioni që dërgoj mund të bëhet publik pasi të shqyrtohet.</span>
+        </label>
+
+        <button type="submit">Dërgo raportin</button>
+      </form>
+    </div>
+  </section>
+
+  <aside>
+    <section id="si-funksionon" class="panel">
+      <h3>Si funksionon</h3>
+      <div class="body">
+        <ol class="steps">
+          <li><b>Dërgon raportin.</b> Tekst, dokumente ose foto.</li>
+          <li><b>Ne e shqyrtojmë.</b> Kontrollojmë që të mos ekspozohen persona të pafajshëm ose burime.</li>
+          <li><b>Publikohet.</b> Materiali i verifikuar del në faqen publike.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="anonimiteti" class="panel">
+      <h3>Mbrojtja e anonimitetit</h3>
+      <div class="body">
+        <ul class="plain">
+          <li>Faqja arrihet vetëm përmes Tor Browser.</li>
+          <li>Nuk përdorim JavaScript, ndjekës, reklama apo shërbime të jashtme.</li>
+          <li>Nuk ruajmë IP, cookies apo identifikues të shfletuesit.</li>
+        </ul>
+        <p class="hint">Përdor Tor Browser me nivelin e sigurisë “Safest” dhe mos e hap faqen nga rrjeti i punës.</p>
+      </div>
+    </section>
+  </aside>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Raportet shqyrtohen para publikimit. Mos dërgo informacion të rremë: akuzat pa prova mund të dëmtojnë persona të pafajshëm.</p>
+    <p>Kjo platformë nuk është e lidhur me asnjë institucion shtetëror.</p>
+  </div>
+</footer>
+
+</body>
+</html>

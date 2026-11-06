@@ -1,0 +1,52 @@
+# ============ 1. Dosjet (ekzekuto si root) ============
+# Faqja (publike) dhe raportet (private) janë dosje TË NDARA.
+mkdir -p /var/www/zeri
+cp faqja.html submit.php /var/www/zeri/
+mkdir -p /var/lib/zeri/incoming
+chown -R www-data:www-data /var/lib/zeri
+chmod 700 /var/lib/zeri /var/lib/zeri/incoming
+
+# ============ 2. Apache: /etc/apache2/sites-available/zeri.conf ============
+# a2enmod headers ; a2ensite zeri ; a2dissite 000-default
+
+ServerTokens Prod
+ServerSignature Off
+Listen 127.0.0.1:8080
+
+<VirtualHost 127.0.0.1:8080>
+    DocumentRoot /var/www/zeri
+    DirectoryIndex faqja.html
+
+    <Directory /var/www/zeri>
+        Options -Indexes -ExecCGI -FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    # Pa regjistrim të vizitorëve
+    CustomLog /dev/null combined
+    ErrorLog /dev/null
+    LogLevel emerg
+
+    LimitRequestBody 120000000
+
+    Header always set Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "no-referrer"
+    Header always set Cache-Control "no-store"
+</VirtualHost>
+
+# ============ 3. PHP (php.ini) ============
+# upload_max_filesize = 10M
+# post_max_size       = 110M
+# max_file_uploads    = 10
+# expose_php          = Off
+
+# ============ 4. Tor: /etc/tor/torrc ============
+# HiddenServiceDir /var/lib/tor/zeri/
+# HiddenServicePort 80 127.0.0.1:8080
+# Pastaj: systemctl restart tor ; adresa .onion është te /var/lib/tor/zeri/hostname
+
+# ============ 5. Pastrimi i metadatave para publikimit ============
+# exiftool -all= -overwrite_original /var/lib/zeri/review/*.jpg
+# mat2 --inplace dokumenti.pdf
